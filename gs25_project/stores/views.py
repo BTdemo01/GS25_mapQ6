@@ -1,6 +1,6 @@
 # stores/views.py
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 # Sử dụng geopy để geocode với Nominatim và tính khoảng cách
 from geopy.geocoders import Nominatim
 from geopy.distance import distance as geopy_distance
@@ -153,14 +153,17 @@ def lien_he_view(request):
 
 
 # --- (Tùy chọn) View cho Trang chi tiết cửa hàng ---
-# def store_detail_view(request, store_id):
-#     """Hiển thị thông tin chi tiết của một cửa hàng."""
-#     try:
-#         store = Store.objects.get(pk=store_id)
-#         context = {'store': store}
-#         return render(request, 'stores/store_detail.html', context)
-#     except Store.DoesNotExist:
-#         # Xử lý trường hợp không tìm thấy store
-#         # Ví dụ: trả về trang 404
-#         from django.http import Http404
-#         raise Http404("Cửa hàng không tồn tại")
+def store_detail_view(request, store_id):
+    """
+    Hiển thị thông tin chi tiết của một cửa hàng dựa vào store_id từ URL.
+    """
+    # Sử dụng get_object_or_404 để lấy store, nếu không tìm thấy sẽ tự động trả về trang 404
+    store = get_object_or_404(Store, pk=store_id)
+
+    # Chuẩn bị context để gửi sang template
+    context = {
+        'store': store
+        # Bạn có thể thêm các context khác nếu cần
+    }
+    # Render template dành riêng cho trang chi tiết
+    return render(request, 'stores/store_detail.html', context)

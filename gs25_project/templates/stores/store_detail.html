@@ -1,0 +1,73 @@
+{# templates/stores/store_detail.html #}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ store.name }} - Chi tiết cửa hàng{% endblock %}
+
+{% block content %}
+<section class="store-detail-section" style="padding: 20px;">
+    <div class="container">
+        {# Lấy tên cửa hàng từ context #}
+        <h1>{{ store.name }}</h1>
+        <hr>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+            {# Cột thông tin bên trái #}
+            <div style="flex: 1; min-width: 300px;">
+                {# Hiển thị ảnh cửa hàng nếu có field ảnh trong model #}
+                {% if store.image %}
+                    <img src="{{ store.image.url }}" alt="{{ store.name }}" style="max-width: 100%; height: auto; margin-bottom: 15px;">
+                {% else %}
+                     {# Ảnh placeholder nếu không có ảnh #}
+                     <img src="{% static 'images/default_store.png' %}" alt="Ảnh cửa hàng mặc định" style="max-width: 100%; height: auto; margin-bottom: 15px;">
+                {% endif %}
+
+                <h2>Thông tin cửa hàng</h2>
+                <p><strong>Giờ mở cửa:</strong> {{ store.opening_hours|default:"Đang cập nhật" }}</p> {# Giả sử có field opening_hours #}
+                <p><strong>Số điện thoại:</strong> {{ store.phone_number|default:"Đang cập nhật" }}</p>
+                <p><strong>Địa chỉ:</strong> {{ store.address }}</p>
+                {# Thêm các thông tin khác nếu có trong model Store #}
+
+            </div>
+
+            {# Cột bản đồ bên phải #}
+            <div style="flex: 2; min-width: 400px; height: 500px;">
+                {# Đặt id cho div chứa bản đồ #}
+                <div id="detail-map" style="height: 100%; width: 100%;"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# Nhúng thư viện Leaflet (ví dụ) #}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+<script>
+    // Lấy tọa độ từ biến context của Django
+    // Dùng '||' để cung cấp giá trị mặc định nếu tọa độ null/undefined
+    var storeLat = {{ store.latitude|default:'null' }};
+    var storeLng = {{ store.longitude|default:'null' }};
+    var storeName = "{{ store.name|escapejs }}"; // escapejs để an toàn
+    var storeAddress = "{{ store.address|escapejs }}";
+
+    // Kiểm tra xem có tọa độ hợp lệ không
+    if (storeLat != null && storeLng != null) {
+        // Khởi tạo bản đồ Leaflet
+        var map = L.map('detail-map').setView([storeLat, storeLng], 16); // Zoom gần hơn (vd: 16)
+
+        // Thêm lớp bản đồ nền OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        // Thêm marker cho cửa hàng
+        var marker = L.marker([storeLat, storeLng]).addTo(map);
+        marker.bindPopup(`<b>${storeName}</b><br>${storeAddress}`).openPopup(); // Hiển thị popup mặc định
+    } else {
+        // Xử lý trường hợp không có tọa độ
+        document.getElementById('detail-map').innerHTML = '<p style="text-align: center; padding-top: 50px;">Không có thông tin vị trí cho cửa hàng này.</p>';
+    }
+</script>
+{% endblock %}

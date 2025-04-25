@@ -5,98 +5,107 @@
 
 {% block content %}
 <section class="banner">
-    <img src="{% static 'images/banner.jpg' %}" alt="GS25 Store Banner"> 
-    </section>
+    <img src="{% static 'images/banner.jpg' %}" alt="GS25 Store Banner">
+</section>
 
 <section class="store-locator">
     <div class="container">
         <h2>Bản đồ cửa hàng GS25</h2>
         <div class="search-bar-container">
-             <form class="store-search-form">
-                <select name="distance_filter" id="distance-filter" class="distance-select">
-                    <option value="">Chọn khoảng cách</option> {# Giá trị rỗng cho lựa chọn mặc định #}
-                    <option value="1">Dưới 1km</option>
-                    <option value="2">Dưới 2km</option>
-                    <option value="3">Dưới 3km</option>
-                    <option value="4">Dưới 4km</option>
-                    <option value="5">Dưới 5km</option>
-                </select>
-                <input type="text" placeholder="Nhập vị trí ...">
-                <button type="submit" class="search-icon">
-                    <div
-                    class="p-5 overflow-hidden w-[60px] h-[60px] hover:w-[270px] bg-[#4070f4] shadow-[2px_2px_20px_rgba(0,0,0,0.08)] rounded-full flex group items-center hover:duration-300 duration-300"
-                    >
-                    <div class="flex items-center justify-center fill-white">
-                        <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        id="Isolation_Mode"
-                        data-name="Isolation Mode"
-                        viewBox="0 0 24 24"
-                        width="22"
-                        height="22"
-                        >
-                        <path
-                            d="M18.9,16.776A10.539,10.539,0,1,0,16.776,18.9l5.1,5.1L24,21.88ZM10.5,18A7.5,7.5,0,1,1,18,10.5,7.507,7.507,0,0,1,10.5,18Z"
-                        ></path>
-                        </svg>
-                    </div>
-                    
-                    </div>
+            {# Thay đổi: Bỏ onsubmit, thêm method=GET #}
+            <form class="store-search-form" id="nearby-search-form" method="GET">
+                {# CSRF token không cần thiết cho GET request #}
+                {# {% csrf_token %} #}
 
+                {# Thay đổi: name="distance" #}
+                <select name="distance" id="distance-filter" class="distance-select">
+                    {# Giữ lại giá trị cũ người dùng đã chọn (nếu có) #}
+                    <option value="" {% if not search_distance %}selected{% endif %}>Chọn khoảng cách</option>
+                    <option value="1" {% if search_distance == "1" %}selected{% endif %}>Dưới 1km</option>
+                    <option value="2" {% if search_distance == "2" %}selected{% endif %}>Dưới 2km</option>
+                    <option value="3" {% if search_distance == "3" %}selected{% endif %}>Dưới 3km</option>
+                    <option value="4" {% if search_distance == "4" %}selected{% endif %}>Dưới 4km</option>
+                    <option value="5" {% if search_distance == "5" %}selected{% endif %}>Dưới 5km</option>
+                </select>
+
+                {# Thay đổi: Thêm name="location" #}
+                <input type="text" placeholder="Nhập vị trí ..." id="location-text-input" name="location" value="{{ search_location|default:'' }}"> {# Giữ lại giá trị cũ #}
+
+                {# Thay đổi: type="submit" #}
+                <button type="submit" class="search-icon" title="Tìm cửa hàng theo vị trí nhập và khoảng cách">
+                    <div
+                    class="p-5 overflow-hidden w-[60px] h-[60px] hover:w-[60px] bg-[#4070f4] shadow-[2px_2px_20px_rgba(0,0,0,0.08)] rounded-full flex group items-center justify-center hover:duration-300 duration-300"
+                    >
+                        <div class="flex items-center justify-center fill-white">
+                            <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            id="Isolation_Mode"
+                            data-name="Isolation Mode"
+                            viewBox="0 0 24 24"
+                            width="22"
+                            height="22"
+                            >
+                            <path
+                                d="M18.9,16.776A10.539,10.539,0,1,0,16.776,18.9l5.1,5.1L24,21.88ZM10.5,18A7.5,7.5,0,1,1,18,10.5,7.507,7.507,0,0,1,10.5,18Z"
+                            ></path>
+                            </svg>
+                        </div>
+                    </div>
                 </button>
-             </form>
+            </form>
         </div>
 
+        {# Thông báo lỗi từ view home_view #}
         {% if error_message %}
             <p style="color: red; text-align: center; margin-top: 10px;">{{ error_message }}</p>
         {% endif %}
 
+        {# Các div này không còn cần thiết nếu không dùng AJAX #}
+        {# <div id="loading-indicator" style="display: none; text-align: center; margin-top: 15px;">Đang tìm kiếm vị trí và cửa hàng...</div> #}
+        {# <div id="error-message" style="color: red; text-align: center; margin-top: 10px;"></div> #}
+
         <div class="locator-content">
             <div class="store-list">
-                <h3>Cửa hàng GS25 Quận 6</h3>
-                <ul>
-                    <li>
-                        <strong>GS25 Nguyễn Văn Luông</strong><br>
-                        Số 223 Đường Nguyễn Văn Luông, Phường 11, Quận 6, Thành phố Hồ Chí Minh<br>
-                        SĐT: (028) 71025218 <br>
-                        <a href="#" class="btn btn-detail">Xem chi tiết</a>
-                    </li>
-                    <li>
-                        <strong>GS25 40-42 Bình Phú</strong><br>
-                        40 - 42 Bình Phú, Phường 11, Quận 6, Thành phố Hồ Chí Minh<br>
-                        SĐT: (028) 71025204 <br>
-                        <a href="#" class="btn btn-detail">Xem chi tiết</a>
-                    </li>
-                    <li>
-                        <strong>GS25 Trần Văn Kêu</strong><br>
-                        45 - 47 Đường số 11, phường 10, quận 6, TP Hồ Chí Minh<br>
-                        SĐT: (028) 71025218 <br>
-                        <a href="#" class="btn btn-detail">Xem chi tiết</a>
-                    </li>
-                    <li>
-                        <strong>GS25 Viva Riverside</strong><br>
-                        Lô thương mại số 1.25 thuộc chung cư Viva Riverside tại số 1472 Võ Văn Kiệt và số 455-449 Gia Phú, phường 3, quận 6, Thành Phố Hồ Chí Minh<br>
-                        SĐT: (028) 71025145 <br>
-                        <a href="#" class="btn btn-detail">Xem chi tiết</a>
-                    </li>
-                    <li>
-                        <strong>GS25 Hậu Giang</strong><br>
-                        Số 489B/18-18A, đường Hậu Giang, phường 11, quận 6 <br>
-                        SĐT: (028) 71025099 <br>
-                        <a href="#" class="btn btn-detail">Xem chi tiết</a>
-                    </li>
-                    <li>
-                        <strong>GS25 Bình Phú</strong><br>
-                        1E - 3E Cư xá Phú Lâm D, Bình Phú, P.10 , Quận 6 <br>
-                        SĐT: (028) 71025086 <br>
-                        <a href="#" class="btn btn-detail">Xem chi tiết</a>
-                    </li>
+                {# Hiển thị tiêu đề động hơn #}
+                {% if search_location %}
+                    <h3>Kết quả tìm kiếm cho "{{ search_location }}" {% if search_distance %}trong vòng {{ search_distance }}km{% endif %}:</h3>
+                {% else %}
+                    <h3>Cửa hàng GS25 Quận 6 (Tất cả cửa hàng)</h3> {# Hoặc tiêu đề mặc định khác #}
+                {% endif %}
+
+                {# Hiển thị danh sách cửa hàng đã lọc từ context['stores'] #}
+                <ul id="store-results-list">
+                     {% for store in stores %}
+                        <li>
+                            <strong>{{ store.name }}</strong>
+                            {# Hiển thị khoảng cách nếu có tìm kiếm #}
+                            {% for item in stores_with_distance %} {# Cần truyền cả stores_with_distance ra context nếu muốn hiển thị distance #}
+                                {% if item.store.id == store.id %}
+                                    ({{ item.distance }} km)
+                                {% endif %}
+                            {% endfor %}
+                            <br>
+                            {{ store.address }}<br>
+                            {# SĐT có thể lấy từ store.phone_number nếu bạn định nghĩa field đó #}
+                            SĐT: {{ store.phone_number|default:'N/A' }} <br>
+                            <a href="{% url 'stores:store_detail' store.id %}" class="btn btn-detail">Xem chi tiết</a> {# Thay đổi href nếu có trang chi tiết #}
+                        </li>
+                    {% empty %}
+                        {# Hiển thị nếu không có cửa hàng nào (kể cả khi không tìm kiếm hoặc tìm không thấy) #}
+                        <li>Không có cửa hàng nào phù hợp.</li>
+                    {% endfor %}
                 </ul>
             </div>
             <div class="map-placeholder">
+                {# Phần này cần JS để cập nhật map dựa trên context['stores_data_for_js'] và context['user_lat'], context['user_lon'] #}
                 <div id="map"></div>
             </div>
         </div>
     </div>
 </section>
+
+{# Tạm thời comment lại toàn bộ khối script AJAX để nó không chạy #}
+{# Phần JS cho bản đồ Leaflet (nếu bạn dùng) sẽ cần đặt ở đây #}
+{# Nó sẽ đọc biến stores_data_for_js, user_lat, user_lon từ context #}
+{# Ví dụ cơ bản (cần có thư viện Leaflet): #}
 {% endblock %}
