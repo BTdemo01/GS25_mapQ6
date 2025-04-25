@@ -167,3 +167,5 @@ def store_detail_view(request, store_id):
     }
     # Render template dành riêng cho trang chi tiết
     return render(request, 'stores/store_detail.html', context)
+
+

@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -127,3 +127,13 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# --- Cấu hình cho Media Files (File người dùng tải lên) ---
+MEDIA_URL = '/media/' # URL để truy cập media files từ trình duyệt
+
+# Đường dẫn tuyệt đối đến thư mục chứa media files trên server
+# Đảm bảo BASE_DIR đã được định nghĩa ở đầu file settings.py
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# Hoặc dùng cách mới hơn nếu BASE_DIR là đối tượng Path:
+# MEDIA_ROOT = BASE_DIR / 'media'
