@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Liên hệ - GS25 Vietnam{% endblock %}
+
+{% block content %}
+<div class="lien-he-page-container">
+    <h1>Trang Liên Hệ</h1>
+
+    <div class="lien-he-main-content">
+        {# Cột bên trái #}
+        <div class="lien-he-left">
+            <h2>Xin chân thành cảm ơn</h2>
+            <blockquote> {# Dùng blockquote cho trích dẫn #}
+                "Cảm ơn bạn đã đồng hành cùng chúng tôi. Hãy luôn tin tưởng, vì chúng tôi luôn nỗ lực mang đến cho bạn những trải nghiệm tốt nhất. Sự tin tưởng của bạn là động lực để chúng tôi phát triển mỗi ngày."
+            </blockquote>
+        </div>
+
+        {# Cột bên phải #}
+        <div class="lien-he-right">
+            <h2>Văn Phòng GS25 Vietnam</h2>
+            <ul class="contact-details">
+                <li>
+                    {# Icon địa chỉ từ Font Awesome #}
+                    <i class="fas fa-map-marker-alt"></i>
+                    {# Địa chỉ lấy từ ảnh trang liên hệ #}
+                    <span>Địa chỉ: 106 Nguyễn Giản Thanh Phường 13 quận 10</span>
+                </li>
+                <li>
+                    {# Icon điện thoại #}
+                    <i class="fas fa-phone"></i>
+                    <span>Số điện thoại:(+84) 28 7302 2525 Hotline: 1900 63 60 78</span>
+                </li>
+                <li>
+                    {# Icon Fax #}
+                    <i class="fas fa-fax"></i>
+                    <span>Fax:(+84) 28 3528 0012</span>
+                </li>
+                <li>
+                    {# Icon Email #}
+                    <i class="fas fa-envelope"></i>
+                    <span>Email: hello@gs25.com.vn</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

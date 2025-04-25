@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}GS25 Vietnam{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> {# Đảm bảo link CSS của bạn vẫn ở đây #}
+    
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <img src="{% static 'images/logo.jpg' %}" alt="GS25 Logo" height="40">
+                </a>
+                <ul class="navbar-nav">
+                    <li><a href="{% url 'stores:gioi_thieu' %}">Giới thiệu</a></li>
+                    <li><a href="{% url 'stores:san_pham' %}">Sản phẩm</a></li>
+                    <li><a href="{% url 'stores:lien_he' %}">Liên hệ</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p class="text-footer">GS 25 Vietnam - Chuỗi cửa hàng tiện lợi đến từ Hàn Quốc - Mở cửa 24/7. Copyright 
+            © 2017 by GS 25 Vietnam. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+
+    {% block extra_scripts %}
+    <script>
+        // 1. Khởi tạo bản đồ
+        // Sử dụng tọa độ trung tâm TP. Hồ Chí Minh làm ví dụ, zoom level 12
+        var map = L.map('map').setView([10.753, 106.635], 14);
+    
+        // 2. Thêm lớp bản đồ nền (Tile Layer)
+        // Sử dụng OpenStreetMap làm nguồn dữ liệu bản đồ
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+    
+        // 3. (QUAN TRỌNG) Thêm đánh dấu (Markers) cho các cửa hàng
+        // Lưu ý: Tọa độ (latitude, longitude) dưới đây chỉ là VÍ DỤ GẦN ĐÚNG.
+        var gsNVL = L.marker([10.7523, 106.6347]).addTo(map) // TODO: Thay [10.7523, 106.6347] bằng tọa độ thật
+            .bindPopup("<b>GS25 Nguyễn Văn Luông</b><br>Số 223 Đường Nguyễn Văn Luông, P.11, Q.6");
+
+        var gsBP1 = L.marker([10.7505, 106.6285]).addTo(map) // TODO: Thay [10.7505, 106.6285] bằng tọa độ thật
+            .bindPopup("<b>GS25 40-42 Bình Phú</b><br>40 - 42 Bình Phú, P.11, Q.6");
+
+        var gsTVK = L.marker([10.7550, 106.6400]).addTo(map) // TODO: Thay [10.7550, 106.6400] bằng tọa độ thật
+            .bindPopup("<b>GS25 Trần Văn Kiểu</b><br>45 - 47 Đường số 11, P.10, Q.6"); // Sửa lại từ Kêu -> Kiểu nếu đúng
+
+        var gsViva = L.marker([10.7518, 106.6529]).addTo(map) // TODO: Thay [10.7518, 106.6529] bằng tọa độ thật (Gần Võ Văn Kiệt/Gia Phú)
+            .bindPopup("<b>GS25 Viva Riverside</b><br>1472 Võ Văn Kiệt / 445-449 Gia Phú, P.3, Q.6");
+
+        var gsHG = L.marker([10.7495, 106.6422]).addTo(map) // TODO: Thay [10.7495, 106.6422] bằng tọa độ thật
+            .bindPopup("<b>GS25 Hậu Giang</b><br>Số 489B/18-18A Hậu Giang, P.11, Q.6");
+
+        var gsBP2 = L.marker([10.7510, 106.6300]).addTo(map) // TODO: Thay [10.7510, 106.6300] bằng tọa độ thật (Cư xá Phú Lâm D)
+            .bindPopup("<b>GS25 Bình Phú (Cư xá)</b><br>1E - 3E Cư xá Phú Lâm D, Bình Phú, P.10, Q.6");
+
+    
+    </script>
+    {% endblock %}
+</body>
+</html>

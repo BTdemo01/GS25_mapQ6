@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Sản phẩm - GS25 Vietnam{% endblock %}
+
+{% block content %}
+<div class="san-pham-container">
+    <h1>Trang Sản Phẩm</h1>
+
+    <div class="sub-header">
+        <h2>Các sản phẩm sắp ra mắt</h2>
+    </div>
+
+    <div class="product-grid">
+        {# Phần này sẽ lặp qua danh sách sản phẩm từ view sau này #}
+        {# Ví dụ: {% for product in products %} ... {% endfor %} #}
+
+        {# Thêm cứng các sản phẩm giống trong ảnh để demo #}
+        <div class="product-item">
+            {# Thay bằng đường dẫn ảnh thật #}
+            <img src="{% static 'images/youus.png' %}" alt="YOUUS Juice">
+            <p>YOUUS (Sky Full)<br>Grapefruit Juice 330ml</p>
+        </div>
+
+        <div class="product-item">
+             {# Thay bằng đường dẫn ảnh thật #}
+            <img src="{% static 'images/bon.png' %}" alt="C'est Bon">
+            <p>C'est Bon Bánh<br>bông lan gạo 90g</p>
+        </div>
+
+        <div class="product-item">
+             {# Thay bằng đường dẫn ảnh thật #}
+            <img src="{% static 'images/mask.png' %}" alt="MAYAN Mask">
+            <p>MAYAN Khẩu trang<br>3D Medi 5 cái</p>
+        </div>
+
+        <div class="product-item">
+             {# Thay bằng đường dẫn ảnh thật #}
+            <img src="{% static 'images/mytom.png' %}" alt="YOUUS Tteokbokki">
+            <p>YOUUS Bánh Tteokbokki<br>ăn liền cực cay</p>
+        </div>
+
+        {# Thêm các sản phẩm khác nếu muốn #}
+
+    </div>
+</div>
+{% endblock %}

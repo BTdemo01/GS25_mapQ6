@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Trang chủ - GS25 Vietnam{% endblock %}
+
+{% block content %}
+<section class="banner">
+    <img src="{% static 'images/banner.jpg' %}" alt="GS25 Store Banner"> 
+    </section>
+
+<section class="store-locator">
+    <div class="container">
+        <h2>Bản đồ cửa hàng GS25</h2>
+        <div class="search-bar-container">
+             <form class="store-search-form">
+                <select name="distance_filter" id="distance-filter" class="distance-select">
+                    <option value="">Chọn khoảng cách</option> {# Giá trị rỗng cho lựa chọn mặc định #}
+                    <option value="1">Dưới 1km</option>
+                    <option value="2">Dưới 2km</option>
+                    <option value="3">Dưới 3km</option>
+                    <option value="4">Dưới 4km</option>
+                    <option value="5">Dưới 5km</option>
+                </select>
+                <input type="text" placeholder="Nhập vị trí ...">
+                <button type="submit" class="search-icon">
+                    <div
+                    class="p-5 overflow-hidden w-[60px] h-[60px] hover:w-[270px] bg-[#4070f4] shadow-[2px_2px_20px_rgba(0,0,0,0.08)] rounded-full flex group items-center hover:duration-300 duration-300"
+                    >
+                    <div class="flex items-center justify-center fill-white">
+                        <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        id="Isolation_Mode"
+                        data-name="Isolation Mode"
+                        viewBox="0 0 24 24"
+                        width="22"
+                        height="22"
+                        >
+                        <path
+                            d="M18.9,16.776A10.539,10.539,0,1,0,16.776,18.9l5.1,5.1L24,21.88ZM10.5,18A7.5,7.5,0,1,1,18,10.5,7.507,7.507,0,0,1,10.5,18Z"
+                        ></path>
+                        </svg>
+                    </div>
+                    
+                    </div>
+
+                </button>
+             </form>
+        </div>
+
+        {% if error_message %}
+            <p style="color: red; text-align: center; margin-top: 10px;">{{ error_message }}</p>
+        {% endif %}
+
+        <div class="locator-content">
+            <div class="store-list">
+                <h3>Cửa hàng GS25 Quận 6</h3>
+                <ul>
+                    <li>
+                        <strong>GS25 Nguyễn Văn Luông</strong><br>
+                        Số 223 Đường Nguyễn Văn Luông, Phường 11, Quận 6, Thành phố Hồ Chí Minh<br>
+                        SĐT: (028) 71025218 <br>
+                        <a href="#" class="btn btn-detail">Xem chi tiết</a>
+                    </li>
+                    <li>
+                        <strong>GS25 40-42 Bình Phú</strong><br>
+                        40 - 42 Bình Phú, Phường 11, Quận 6, Thành phố Hồ Chí Minh<br>
+                        SĐT: (028) 71025204 <br>
+                        <a href="#" class="btn btn-detail">Xem chi tiết</a>
+                    </li>
+                    <li>
+                        <strong>GS25 Trần Văn Kêu</strong><br>
+                        45 - 47 Đường số 11, phường 10, quận 6, TP Hồ Chí Minh<br>
+                        SĐT: (028) 71025218 <br>
+                        <a href="#" class="btn btn-detail">Xem chi tiết</a>
+                    </li>
+                    <li>
+                        <strong>GS25 Viva Riverside</strong><br>
+                        Lô thương mại số 1.25 thuộc chung cư Viva Riverside tại số 1472 Võ Văn Kiệt và số 455-449 Gia Phú, phường 3, quận 6, Thành Phố Hồ Chí Minh<br>
+                        SĐT: (028) 71025145 <br>
+                        <a href="#" class="btn btn-detail">Xem chi tiết</a>
+                    </li>
+                    <li>
+                        <strong>GS25 Hậu Giang</strong><br>
+                        Số 489B/18-18A, đường Hậu Giang, phường 11, quận 6 <br>
+                        SĐT: (028) 71025099 <br>
+                        <a href="#" class="btn btn-detail">Xem chi tiết</a>
+                    </li>
+                    <li>
+                        <strong>GS25 Bình Phú</strong><br>
+                        1E - 3E Cư xá Phú Lâm D, Bình Phú, P.10 , Quận 6 <br>
+                        SĐT: (028) 71025086 <br>
+                        <a href="#" class="btn btn-detail">Xem chi tiết</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="map-placeholder">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

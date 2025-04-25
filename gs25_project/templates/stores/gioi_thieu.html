@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Giới thiệu - GS25 Vietnam{% endblock %}
+
+{% block content %}
+<div class="gioi-thieu-container">
+    <h1>Trang Giới Thiệu</h1>
+    <div class="gioi-thieu-content">
+        <div class="gioi-thieu-text">
+            {# Phần nội dung text giống trong ảnh #}
+            <p>Chào mừng bạn đến với website Xem Cửa Hàng GS25 Quận 6 – công cụ tiện lợi giúp bạn tìm kiếm nhanh chóng các cửa hàng GS25 nằm trong khu vực Quận 6, TP. Hồ Chí Minh.</p>
+            <p>Với giao diện thân thiện và bản đồ tương tác trực quan, website sẽ giúp bạn xác định chính xác vị trí các cửa hàng GS25 trong khu vực Quận 6, đi kèm với các thông tin quan trọng như địa chỉ, giờ hoạt động, dịch vụ nổi bật và cả hướng dẫn đường đi. Dù bạn đang ở nhà, ngoài đường hay mới đặt chân đến Quận 6, bạn đều có thể nhanh chóng tìm được cửa hàng GS25 gần nhất và phù hợp nhất với nhu cầu.</p>
+            <p>Hãy để hành trình mua sắm của bạn bắt đầu dễ dàng hơn bao giờ hết – chỉ cần truy cập và khám phá!</p>
+        </div>
+        <div class="gioi-thieu-image">
+            <img src="{% static 'images/img-main.png' %}" alt="Cửa hàng GS25">
+        </div>
+    </div>
+</div>
+{% endblock %}

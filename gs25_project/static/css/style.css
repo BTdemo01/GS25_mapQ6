@@ -1,0 +1,480 @@
+/* Reset cơ bản */
+body, h1, h2, h3, p, ul, li, form {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif; /* Thay bằng font phù hợp */
+    line-height: 1.6;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px; /* Hoặc chiều rộng mong muốn */
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* --- Header --- */
+header {
+    background-color: #1c8fe1; /* Hoặc màu header của GS25 */
+    border-bottom: 1px solid #eee;
+    padding: 20px 0;
+}
+
+/* .navbar {
+     background-color: #f8f9fa; 
+} */
+
+
+.navbar .container {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+
+.navbar-brand img {
+    display: block; /* Loại bỏ khoảng trắng dưới ảnh */
+}
+
+.navbar-nav {
+    list-style: none;
+    display: flex;
+}
+
+.navbar-nav li {
+    margin-left: 20px; /* Khoảng cách giữa các mục menu */
+}
+
+.navbar-nav a {
+    text-decoration: none;
+    color: white; /* Màu link GS25 */
+    font-weight: bold;
+}
+ .navbar-nav a:hover {
+     color: #0056b3;
+ }
+
+ .search-form-header {
+    display: flex;
+ }
+ .search-form-header input {
+     padding: 5px 10px;
+     border: 1px solid #ccc;
+     border-radius: 4px 0 0 4px;
+ }
+  .search-form-header button {
+     padding: 5px 10px;
+     border: 1px solid #ccc;
+     border-left: none;
+     background-color: #f0f0f0;
+     cursor: pointer;
+     border-radius: 0 4px 4px 0;
+  }
+
+
+/* --- Banner --- */
+.banner img {
+    width: 100%;
+    display: block;
+    height: auto; /* Giữ tỷ lệ */
+    max-height: 400px; /* Giới hạn chiều cao nếu cần */
+    object-fit: cover; /* Đảm bảo ảnh che phủ khu vực */
+}
+
+/* --- Store Locator --- */
+.store-locator {
+    padding: 40px 0;
+    background-color: #d0effc; /* Màu nền nhẹ */
+}
+
+.store-locator h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #1c8fe1; /* Màu tiêu đề */
+}
+
+.search-bar-container {
+    text-align: center; /* Căn giữa thanh tìm kiếm */
+    margin-bottom: 30px;
+}
+
+.store-search-form {
+   display: inline-flex; /* Để input và button nằm cạnh nhau */
+   align-items: stretch;
+   border: 1px solid #1c8fe1;
+   border-radius: 10px;
+   overflow: hidden; /* Đảm bảo button nằm gọn */
+   height: 45px;
+   background-color: #fff;
+}
+
+.store-search-form input[type="text"] {
+   padding: 10px 15px;
+   font-size: 1rem;
+   border: none; /* Bỏ viền mặc định */
+   min-width: 300px; /* Độ rộng tối thiểu */
+   outline: none;
+}
+
+.store-search-form button {
+   background-color: #1c8fe1;
+   border: none;
+   padding: 0 25px;
+   cursor: pointer;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+ .store-search-form button img {
+     height: 20px;
+     width: auto;
+ }
+
+.locator-content {
+    display: flex;
+    gap: 30px; /* Khoảng cách giữa danh sách và bản đồ */
+}
+
+.store-list {
+    flex: 1; /* Chiếm 1 phần */
+    max-height: 400px; /* Giới hạn chiều cao và thêm scroll nếu cần */
+    overflow-y: auto; /* Thêm thanh cuộn dọc nếu nội dung dài */
+     border: 1px solid #eee;
+     padding: 15px;
+     background-color: #fff;
+}
+ .store-list h3 {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+ }
+  .store-list ul {
+     list-style: none;
+  }
+ .store-list li {
+     margin-bottom: 15px;
+     padding-bottom: 10px;
+     border-bottom: 1px dotted #ccc;
+ }
+ .store-list li:last-child {
+    border-bottom: none;
+ }
+  .store-list strong {
+    color: #0056b3;
+  }
+
+
+.map-placeholder {
+    flex: 2; /* Chiếm 2 phần, rộng hơn danh sách */
+    background-color: #e9ecef; /* Màu nền cho chỗ bản đồ */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+     border: 1px solid #ccc;
+}
+
+/* --- Footer --- */
+footer {
+    background-color: #1c8fe1; /* Màu footer GS25 */
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.9em;
+}
+ footer p {
+    margin-bottom: 5px;
+ }
+
+
+
+
+/* ----------------- MAP ---------------- */
+#map {
+    height: 450px; /* Chiều cao mong muốn cho bản đồ */
+    width: 100%;   /* Chiếm toàn bộ chiều rộng của container cha */
+    border: 1px solid #ccc; /* Thêm đường viền nếu muốn */
+}
+
+
+/* trang giới thiệu ở đây */
+
+.gioi-thieu-container {
+    background-color: #e0f7ff; /* Màu xanh nhạt giống ảnh */
+    padding: 105px 40px;
+    margin: 30px auto;
+    max-width: 1340px; /* Điều chỉnh chiều rộng tối đa nếu cần */
+    border-radius: 10px; /* Bo góc nhẹ */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Thêm bóng đổ nhẹ */
+}
+
+.gioi-thieu-container h1 {
+    text-align: center;
+    color: #007bff; /* Màu tiêu đề */
+    margin-bottom: 30px;
+}
+
+.gioi-thieu-content {
+    display: flex; /* Sử dụng Flexbox để tạo bố cục cột */
+    gap: 30px; /* Khoảng cách giữa cột text và cột ảnh */
+    align-items: flex-start; /* Căn chỉnh các item từ trên xuống */
+}
+
+.gioi-thieu-text {
+    flex: 2; /* Cột text chiếm 2 phần */
+    text-align: justify; /* Căn đều chữ */
+    line-height: 1.7; /* Giãn dòng cho dễ đọc */
+}
+
+.gioi-thieu-text p {
+    margin-bottom: 1em; /* Khoảng cách giữa các đoạn văn */
+}
+
+.gioi-thieu-image {
+    flex: 1; /* Cột ảnh chiếm 1 phần */
+}
+
+.gioi-thieu-image img {
+    max-width: 100%; /* Ảnh tự động co giãn theo cột */
+    height: auto;
+    display: block; /* Loại bỏ khoảng trắng thừa dưới ảnh */
+    border-radius: 10px; /* Bo góc nhẹ cho ảnh */
+}
+
+/* Responsive: Nếu màn hình nhỏ thì xếp chồng lên nhau */
+@media (max-width: 768px) {
+    .gioi-thieu-content {
+        flex-direction: column; /* Chuyển thành cột dọc */
+    }
+    .gioi-thieu-image {
+        margin-top: 20px; /* Thêm khoảng cách phía trên ảnh */
+        align-self: center; /* Căn ảnh ra giữa */
+        max-width: 80%; /* Giảm kích thước ảnh trên mobile */
+    }
+}
+
+
+
+
+/* TRANG SẢN PHẨM Ở ĐÂY NÈ */
+
+.san-pham-container {
+    max-width: 1300px; /* Giới hạn chiều rộng */
+    margin: 80px auto; /* Căn giữa và tạo khoảng cách */
+    padding: 0 15px; /* Padding hai bên */
+}
+
+.san-pham-container h1 {
+    text-align: center;
+    color: #333; /* Màu tiêu đề chính */
+    margin-bottom: 20px;
+}
+
+.sub-header {
+    background-color: #1c8fe1; /* Nền xanh dương giống ảnh */
+    color: white; /* Chữ trắng */
+    padding: 12px 20px;
+    text-align: center;
+    margin-bottom: 40px; /* Khoảng cách với lưới sản phẩm */
+    border-radius: 5px;
+}
+
+.sub-header h2 {
+    margin: 0;
+    font-size: 1.3em;
+    font-weight: 500; /* Độ dày chữ vừa phải */
+}
+
+.product-grid {
+    display: grid;
+    /* Tạo lưới co giãn, tối thiểu 200px/cột, tối đa 1fr (chia đều) */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px; /* Khoảng cách giữa các sản phẩm */
+}
+
+.product-item {
+    background-color: #fff; /* Nền trắng cho mỗi item */
+    border: 1px solid #e0e0e0; /* Viền xám nhạt */
+    border-radius: 8px; /* Bo góc */
+    padding: 20px;
+    text-align: center; /* Căn giữa nội dung */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08); /* Đổ bóng nhẹ */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Hiệu ứng khi hover */
+}
+
+.product-item:hover {
+    transform: translateY(-5px); /* Nâng nhẹ item lên */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.12); /* Bóng đổ rõ hơn */
+}
+
+.product-item img {
+    max-width: 100%;
+    height: 160px; /* Cố định chiều cao ảnh */
+    object-fit: contain; /* Hiển thị toàn bộ ảnh, giữ tỷ lệ */
+    margin-bottom: 15px; /* Khoảng cách dưới ảnh */
+}
+
+.product-item p {
+    margin: 0;
+    font-size: 1em; /* Kích thước tên sản phẩm */
+    color: #333;
+    line-height: 1.4;
+}
+
+/* LIÊN HỆ Ở ĐÂY NÈ */
+
+.lien-he-page-container {
+    max-width: 1140px;
+    margin: 95px auto;
+    padding: 0 15px;
+}
+
+.lien-he-page-container h1 {
+    text-align: center;
+    color: #007bff; /* Màu xanh dương */
+    margin-bottom: 35px;
+    font-weight: 600; /* Chữ đậm hơn chút */
+}
+
+.lien-he-main-content {
+    display: flex; /* Bố cục 2 cột */
+    gap: 40px; /* Khoảng cách giữa 2 cột */
+    background-color: #f8f9fa; /* Nền xám rất nhạt */
+    padding: 35px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08); /* Bóng đổ nhẹ */
+}
+
+.lien-he-left, .lien-he-right {
+    flex: 1; /* Chia đều chiều rộng 2 cột */
+}
+
+.lien-he-left h2, .lien-he-right h2 {
+    color: #333;
+    margin-top: 0; /* Bỏ margin top mặc định của h2 */
+    margin-bottom: 20px;
+    border-bottom: 2px solid #007bff; /* Gạch chân xanh */
+    padding-bottom: 10px;
+    font-size: 1.5em; /* Kích thước tiêu đề phụ */
+}
+
+.lien-he-left blockquote {
+    border-left: 5px solid #007bff; /* Viền trái xanh */
+    padding-left: 20px;
+    margin: 0;
+    font-style: italic; /* Chữ nghiêng */
+    color: #555;
+    line-height: 1.8; /* Giãn dòng */
+    font-size: 1.05em;
+}
+
+.contact-details {
+    list-style: none; /* Bỏ dấu chấm đầu dòng */
+    padding: 0;
+    margin: 0;
+}
+
+.contact-details li {
+    display: flex; /* Xếp icon và text trên 1 hàng */
+    align-items: flex-start; /* Căn trên */
+    margin-bottom: 18px; /* Khoảng cách giữa các dòng liên hệ */
+    color: #444;
+    font-size: 1em;
+}
+
+.contact-details li i {
+    color: #007bff; /* Màu icon */
+    margin-right: 15px; /* Khoảng cách giữa icon và text */
+    width: 20px; /* Độ rộng cố định cho icon để căn chỉnh */
+    text-align: center;
+    padding-top: 3px; /* Chỉnh vị trí icon */
+}
+
+.contact-details li span {
+    flex: 1; /* Cho phép text tự xuống dòng */
+    line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .lien-he-main-content {
+        flex-direction: column; /* Chuyển thành cột dọc */
+        gap: 30px;
+        padding: 25px;
+    }
+    .lien-he-left h2, .lien-he-right h2 {
+        font-size: 1.3em;
+    }
+}
+
+
+/* CSS cho nút Xem chi tiết */
+.btn-detail {
+    display: inline-block; /* Để có thể set padding, margin */
+    background-color: #007bff; /* Màu nền xanh dương (hoặc màu khác bạn muốn) */
+    color: white !important; /* Màu chữ trắng, !important để ghi đè màu link mặc định nếu cần */
+    padding: 6px 12px; /* Độ lớn của nút */
+    border: none; /* Không có viền */
+    border-radius: 4px; /* Bo góc */
+    text-decoration: none; /* Bỏ gạch chân của link */
+    font-size: 0.9em; /* Cỡ chữ nhỏ hơn chút */
+    margin-top: 8px; /* Khoảng cách phía trên nút */
+    cursor: pointer; /* Biểu tượng bàn tay khi rê chuột */
+    transition: background-color 0.2s ease; /* Hiệu ứng khi hover */
+}
+
+.btn-detail:hover {
+    background-color: #0056b3; /* Màu nền đậm hơn khi hover */
+    color: white !important;
+}
+
+/* Có thể cần tăng khoảng cách giữa các mục li để chứa nút */
+.store-list li {
+     margin-bottom: 20px; /* Tăng nếu cần */
+     padding-bottom: 15px; /* Tăng nếu cần */
+     /* border-bottom: 1px dotted #ccc; */ /* Giữ hoặc bỏ viền dưới tùy ý */
+}
+
+
+/* Định dạng cho ô dropdown khoảng cách */
+.distance-select {
+    padding: 0 15px; /* Padding bên trong */
+    font-size: 1rem;
+    border: none; /* Bỏ viền mặc định */
+    border-right: 1px solid #ccc; /* Tạo đường kẻ phân cách */
+    background-color: #f8f9fa; /* Màu nền hơi khác để phân biệt (tùy chọn) */
+    cursor: pointer;
+    outline: none; /* Bỏ viền xanh khi focus */
+    /* Không cần set height vì align-items: stretch ở trên */
+}
+
+/* Định dạng cho ô nhập vị trí */
+.location-input { /* Sử dụng class mới đã thêm */
+   padding: 10px 15px;
+   font-size: 1rem;
+   border: none; /* Bỏ viền mặc định */
+   outline: none; /* Bỏ viền xanh khi focus */
+   flex-grow: 1; /* Cho phép ô input chiếm không gian còn lại */
+    /* Không cần set height */
+}
+
+/* Đảm bảo nút tìm kiếm căn chỉnh đúng */
+.store-search-form button.search-icon {
+   background-color: #007bff;
+   border: none;
+   padding: 0 15px;
+   cursor: pointer;
+   display: flex;
+   align-items: center; /* Căn giữa icon theo chiều dọc */
+   justify-content: center;
+    border-radius: 0; /* Bỏ bo góc riêng của nút */
+    /* Không cần set height */
+}
+.store-search-form button.search-icon img {
+     height: 20px;
+     width: auto;
+}
